@@ -38,7 +38,16 @@
             <children>
                <TitledPane alignment="TOP_LEFT" animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Filtres" VBox.vgrow="ALWAYS">
                  <content>
-                   <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" />
+                   <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="245.0">
+                        <children>
+                           <Label layoutX="20.0" layoutY="25.0" text="Intensité" />
+                           <TextField layoutX="28.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Minimum" />
+                           <TextField layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
+                           <Label layoutX="20.0" layoutY="98.0" text="Date" />
+                           <ChoiceBox layoutX="28.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox layoutX="101.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox layoutX="173.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
+                        </children></AnchorPane>
                  </content>
                </TitledPane>
             </children>
