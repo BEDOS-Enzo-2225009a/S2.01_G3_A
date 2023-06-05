@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
-    <BorderPane prefHeight="390.0" prefWidth="451.0">
+    <BorderPane prefHeight="421.0" prefWidth="53.0">
         <top>
-            <MenuBar>
+            <MenuBar fx:id="bar">
                 <menus>
                     <Menu fx:id="data" text="Data">
                         <items>
@@ -16,7 +16,7 @@
                             <MenuItem text="Open CSV" />
                         </items>
                     </Menu>
-               <Menu mnemonicParsing="false" text="Carte">
+               <Menu fx:id="graphe" mnemonicParsing="false" text="Carte">
                  <items>
                    <MenuItem mnemonicParsing="false" text="Graphique 1" />
                      <MenuItem mnemonicParsing="false" text="Graphique 2" />
@@ -26,15 +26,22 @@
                 </menus>
             </MenuBar>
         </top>
-      <center>
-         <HBox prefHeight="1722.0" prefWidth="1519.0" BorderPane.alignment="CENTER" />
-      </center>
       <left>
          <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-               <Pane prefHeight="200.0" prefWidth="200.0" />
+               <Pane prefHeight="363.0" prefWidth="209.0" />
             </children>
          </HBox>
       </left>
+      <right>
+         <HBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="199.0" BorderPane.alignment="CENTER_RIGHT">
+            <children>
+               <TitledPane alignment="TOP_LEFT" animated="false" text="Filtres">
+                 <content>
+                   <AnchorPane focusTraversable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="200.0" />
+                 </content>
+               </TitledPane>
+            </children></HBox>
+      </right>
     </BorderPane>
 </VBox>
