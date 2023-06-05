@@ -23,7 +23,15 @@
                         <SeparatorMenuItem />
                         <MenuItem text=" Acceuil"/>
                     </items>
-
+                </Menu>
+                <Menu text ="on verra 2">
+                    <items>
+                        <MenuItem text=" fonction1"/>
+                        <MenuItem text=" fonction2"/>
+                        <MenuItem text=" fonction3"/>
+                        <SeparatorMenuItem />
+                        <MenuItem text=" Acceuil"/>
+                    </items>
                 </Menu>
             </menus>
         </MenuBar>
