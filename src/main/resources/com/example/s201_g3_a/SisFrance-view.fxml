@@ -8,18 +8,33 @@
         <top>
             <MenuBar>
                 <menus>
-                    <Menu text="Data">
+                    <Menu fx:id="data" text="Data">
                         <items>
-                            <MenuItem text="Carte" fx:id="carte"/>
+                            <MenuItem text="Importer" />
+                     <MenuItem mnemonicParsing="false" text="Exporter" />
                             <SeparatorMenuItem />
-                            <MenuItem text="Data" fx:id="data" />
+                            <MenuItem text="Open CSV" />
                         </items>
                     </Menu>
+               <Menu mnemonicParsing="false" text="Carte">
+                 <items>
+                   <MenuItem mnemonicParsing="false" text="Graphique 1" />
+                     <MenuItem mnemonicParsing="false" text="Graphique 2" />
+                     <MenuItem mnemonicParsing="false" text="Graphique 3" />
+                 </items>
+               </Menu>
                 </menus>
             </MenuBar>
         </top>
       <center>
          <HBox prefHeight="1722.0" prefWidth="1519.0" BorderPane.alignment="CENTER" />
       </center>
+      <left>
+         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <Pane prefHeight="200.0" prefWidth="200.0" />
+            </children>
+         </HBox>
+      </left>
     </BorderPane>
 </VBox>
