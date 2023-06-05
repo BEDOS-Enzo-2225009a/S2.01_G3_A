@@ -1,42 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.s201_g3_a.SisFranceController">
-    <top>
-        <MenuBar>
-            <menus>
-                <Menu text=" On verra">
-                    <items>
-                        <MenuItem text=" fonction1"/>
-                        <MenuItem text=" fonction2"/>
-                        <MenuItem text=" fonction3"/>
-                        <SeparatorMenuItem />
-                        <MenuItem text=" Acceuil"/>
-                    </items>
-                </Menu>
-                <Menu text ="on verra 2">
-                    <items>
-                        <MenuItem text=" fonction1"/>
-                        <MenuItem text=" fonction2"/>
-                        <MenuItem text=" fonction3"/>
-                        <SeparatorMenuItem />
-                        <MenuItem text=" Acceuil"/>
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</BorderPane>
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
+    <BorderPane prefHeight="390.0" prefWidth="451.0">
+        <top>
+            <MenuBar>
+                <menus>
+                    <Menu text="Data">
+                        <items>
+                            <MenuItem text="Carte" fx:id="carte"/>
+                            <SeparatorMenuItem />
+                            <MenuItem text="Data" fx:id="data" />
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+        </top>
+      <center>
+         <HBox prefHeight="1722.0" prefWidth="1519.0" BorderPane.alignment="CENTER" />
+      </center>
+    </BorderPane>
+</VBox>
