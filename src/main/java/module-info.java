@@ -4,6 +4,7 @@ module com.example.s201_g3_a {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires javafx.web;
 
     opens com.example.s201_g3_a to javafx.fxml;
     exports com.example.s201_g3_a;
