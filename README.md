@@ -46,3 +46,6 @@ M-->VM
 
 
 ```
+
+https://stackoverflow.com/questions/29324811/javafx-open-webview-in-fxml-document
+https://github.com/N1k145/LeafletMap

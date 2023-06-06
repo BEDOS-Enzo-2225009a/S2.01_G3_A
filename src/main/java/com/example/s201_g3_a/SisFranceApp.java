@@ -10,6 +10,8 @@ import java.io.IOException;
 public class SisFranceApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(SisFranceApp.class.getResource("SisFrance-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setTitle("SisFranceApp");
