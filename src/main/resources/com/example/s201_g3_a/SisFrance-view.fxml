@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
+<VBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceView">
     <BorderPane prefHeight="773.0" prefWidth="1186.0">
         <top>
             <MenuBar fx:id="bar">
