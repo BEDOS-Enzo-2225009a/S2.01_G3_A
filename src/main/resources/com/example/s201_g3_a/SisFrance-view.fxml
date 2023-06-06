@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="673.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
+<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
     <BorderPane prefHeight="390.0" prefWidth="451.0">
         <top>
             <MenuBar fx:id="bar">
@@ -16,7 +16,7 @@
                             <MenuItem text="Open CSV" />
                         </items>
                     </Menu>
-               <Menu fx:id="carte" mnemonicParsing="false" onAction="#onCarteMenuchange" text="Carte">
+               <Menu fx:id="carte" mnemonicParsing="false" text="Carte" onAction="#onCarteMenuchange">
                  <items>
                    <MenuItem fx:id="graph1" mnemonicParsing="false" text="Graphique 1" />
                      <MenuItem fx:id="graph2" mnemonicParsing="false" text="Graphique 2" />
@@ -27,8 +27,18 @@
             </MenuBar>
         </top>
       <center>
-         <HBox prefHeight="1722.0" prefWidth="1519.0" BorderPane.alignment="CENTER" />
+          <StackPane >
+              <children>
+              </children>
+          </StackPane>
       </center>
+      <left>
+         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <Pane prefHeight="363.0" prefWidth="209.0" />
+            </children>
+         </HBox>
+      </left>
       <right>
          <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
@@ -40,9 +50,9 @@
                            <TextField layoutX="28.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Minimum" />
                            <TextField layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
                            <Label layoutX="20.0" layoutY="98.0" text="Date" />
-                           <ChoiceBox fx:id="choiceDay" layoutX="28.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
-                           <ChoiceBox fx:id="choiceMonth" layoutX="101.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
-                           <ChoiceBox fx:id="choiceYear" layoutX="173.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox layoutX="28.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox layoutX="101.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox layoutX="173.0" layoutY="129.0" prefHeight="24.0" prefWidth="58.0" />
                         </children></AnchorPane>
                  </content>
                </TitledPane>
