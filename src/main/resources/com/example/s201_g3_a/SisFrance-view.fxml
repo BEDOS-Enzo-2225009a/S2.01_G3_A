@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
-    <BorderPane prefHeight="390.0" prefWidth="451.0">
+<VBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceController">
+    <BorderPane prefHeight="773.0" prefWidth="1186.0">
         <top>
             <MenuBar fx:id="bar">
                 <menus>
@@ -16,7 +16,7 @@
                             <MenuItem text="Open CSV" />
                         </items>
                     </Menu>
-               <Menu fx:id="carte" mnemonicParsing="false" text="Carte" onAction="#onCarteMenuchange">
+               <Menu fx:id="carte" mnemonicParsing="false" onAction="#onCarteMenuchange" text="Carte">
                  <items>
                    <MenuItem fx:id="graph1" mnemonicParsing="false" text="Graphique 1" />
                      <MenuItem fx:id="graph2" mnemonicParsing="false" text="Graphique 2" />
@@ -27,18 +27,17 @@
             </MenuBar>
         </top>
       <center>
-          <StackPane >
-              <children>
-              </children>
-          </StackPane>
+          <Pane id="pane">
+
+          </Pane>
       </center>
-      <left>
-         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-               <Pane prefHeight="363.0" prefWidth="209.0" />
-            </children>
-         </HBox>
-      </left>
+<!--      <left>-->
+<!--         <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">-->
+<!--            <children>-->
+<!--               <Pane prefHeight="363.0" prefWidth="209.0" />-->
+<!--            </children>-->
+<!--         </HBox>-->
+<!--      </left>-->
       <right>
          <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
