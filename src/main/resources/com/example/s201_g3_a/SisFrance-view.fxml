@@ -28,7 +28,8 @@
             </MenuBar>
         </top>
       <center>
-            <WebView fx:id="map">
+            <WebView fx:id="map" >
+
 
             </WebView>
       </center>
