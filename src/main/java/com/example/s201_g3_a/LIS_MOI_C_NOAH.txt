@@ -1,0 +1,48 @@
+petites explications supplémentaires sur les fonctions que j'ai faites cete nuit, ce matin je viens pas car la j'ai pas dormi les reufs
+bonne chance :)
+le graphique1 est un peu dégueulasse, mais je vous laisse y jeter un oeil je crois en vous
+
+AUSSI RAYAN, non j'ai pas enculé ton système pour changer les texte du menu carte, il faut juste ajouter des if je m'en occuperai si vs voulez
+voila bisous
+
+Fonction afficherGraphique1(List<DonneesSismiques> donnees):
+
+Cette fonction prend en entrée une liste de données sismiques.
+Elle crée un graphique en barres affichant l'intensité des données sismiques en fonction de l'année.
+L'axe des abscisses représente les années, tandis que l'axe des ordonnées représente l'intensité.
+Les données sont extraites de la liste passée en argument et ajoutées à une série de données.
+La série de données est ensuite ajoutée au graphique.
+Finalement, le graphique est affiché dans le panneau graphPane (à retrouver dans le fxml également).
+
+Fonction onCarteMenuchange():
+
+Cette fonction est appelée lorsque l'utilisateur change l'option du menu "carte".
+Si l'option actuelle est "Graphique 1", le texte du menu est changé en "Carte", et le texte des autres options de graphique est réinitialisé.
+Le panneau graphPane est effacé pour supprimer le graphique précédent, et la carte (WebView) est rendue visible.
+Si l'option actuelle est "Carte", le texte du menu est changé en "Graphique 1", et le texte des autres options de graphique est mis à jour.
+Le panneau graphPane est effacé pour supprimer le graphique précédent, et la carte est masquée.
+Finalement, la fonction afficherGraphique1 est appelée pour afficher le graphique 1 à l'aide des données sismiques.
+
+
+Fonction exporterDonneesCsv():
+
+Cette fonction permet d'exporter les données sismiques dans un fichier CSV.
+Elle affiche une boîte de dialogue pour permettre à l'utilisateur de sélectionner un emplacement et un nom de fichier pour sauvegarder le fichier CSV.
+Si un fichier est sélectionné, les données sont écrites dans le fichier CSV avec les en-têtes appropriés.
+
+
+Fonction importerDonneesCsv():
+
+Cette fonction permet d'importer des données sismiques à partir d'un fichier CSV.
+Elle affiche une boîte de dialogue pour permettre à l'utilisateur de sélectionner un fichier CSV à ouvrir.
+Si un fichier est sélectionné, les données sont lues à partir du fichier CSV, en ignorant l'en-tête.
+Chaque ligne de données est analysée et utilisée pour créer un objet DonneesSismiques, qui est ensuite ajouté à la liste donneesSismiques.
+
+Fonction openCsv():
+
+Cette fonction ouvre une nouvelle fenêtre pour afficher les données sismiques dans un tableau triées par date (à priori).
+Elle crée une TableView et ajoute des colonnes pour chaque attribut des données sismiques.
+Les données sont ajoutées à la TableView à l'aide d'une FilteredList pour permettre la recherche et le filtrage.
+Un champ de recherche est affiché au-dessus du tableau pour permettre à l'utilisateur de rechercher des mots-clés, des identifiants, des dates, etc.
+Les données sont filtrées en fonction du texte saisi dans le champ de recherche, affichant uniquement les lignes correspondantes.
+Veuillez noter que cette documentation est basée sur les informations fournies dans le code. Pour des détails plus précis sur chaque fonction, vous pouvez consulter les commentaires dans le code source.

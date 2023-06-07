@@ -7,7 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -20,6 +22,11 @@ import javafx.scene.web.WebView;
 public class SisFranceView {
 
     private SisFranceViewModel viewModel;
+
+    @FXML
+    private Pane graphPane; // Pane pour afficher le graphique
+
+
 
     @FXML
     private MenuItem importer;
@@ -47,17 +54,18 @@ public class SisFranceView {
 
     private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
 
-    private class DonneesSismiques {
-        String identifiant;
-        String date;
-        String heure;
-        String intensite;
-        String qualite;
-        String nom;
-        String region;
-        String choc;
+    private class DonneesSismiques { // Classe que j'ai créé pour pourvoir classer les données. Si vous voulez réutiliser les données importées par l'import d'un fichier CSV, il faut utiliser la liste
+        // donneesSismiques que j'ai créée juste en haut. Elle contient après l'import tout ce qu'il faut pour utiliser les données du CSV.
+        private String identifiant;
+        private String date;
+        private String heure;
+        private String intensite;
+        private String qualite;
+        private String nom;
+        private String region;
+        private String choc;
 
-        DonneesSismiques(String identifiant, String date, String heure, String intensite, String qualite, String nom, String region, String choc) {
+        public DonneesSismiques(String identifiant, String date, String heure, String intensite, String qualite, String nom, String region, String choc) {
             this.identifiant = identifiant;
             this.date = date;
             this.heure = heure;
@@ -67,7 +75,72 @@ public class SisFranceView {
             this.region = region;
             this.choc = choc;
         }
+
+        public String getIdentifiant() {
+            return identifiant;
+        }
+
+        public void setIdentifiant(String identifiant) {
+            this.identifiant = identifiant;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getHeure() {
+            return heure;
+        }
+
+        public void setHeure(String heure) {
+            this.heure = heure;
+        }
+
+        public String getIntensite() {
+            return intensite;
+        }
+
+        public void setIntensite(String intensite) {
+            this.intensite = intensite;
+        }
+
+        public String getQualite() {
+            return qualite;
+        }
+
+        public void setQualite(String qualite) {
+            this.qualite = qualite;
+        }
+
+        public String getNom() {
+            return nom;
+        }
+
+        public void setNom(String nom) {
+            this.nom = nom;
+        }
+
+        public String getRegion() {
+            return region;
+        }
+
+        public void setRegion(String region) {
+            this.region = region;
+        }
+
+        public String getChoc() {
+            return choc;
+        }
+
+        public void setChoc(String choc) {
+            this.choc = choc;
+        }
     }
+
 
 
 
@@ -161,6 +234,48 @@ public class SisFranceView {
         exporter.setOnAction(event -> exporterDonneesCsv());
         openCsv.setOnAction(event -> openCsv());
     }
+
+    private void afficherGraphique1(List<DonneesSismiques> donnees) {
+        // Création des axes du graphique
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        // Configuration de l'axe des abscisses
+        xAxis.setLabel("Année");
+
+        // Création du graphique en barres
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+
+        // Configuration du graphique
+        barChart.setTitle("Intensité des données sismiques");
+
+        // Création de la série de données
+        XYChart.Series<String, Number> dataSeries = new XYChart.Series<>();
+        dataSeries.setName("Intensité");
+
+        // Ajout des données à la série
+        for (DonneesSismiques donnee : donnees) {
+            String year = donnee.getDate().substring(0, 4); // Récupération des quatre premiers caractères pour l'année
+            double intensity = Double.parseDouble(donnee.getIntensite().replace("\"", ""));
+
+            dataSeries.getData().add(new XYChart.Data<>(year, intensity));
+        }
+
+        // Ajout de la série au graphique
+        barChart.getData().add(dataSeries);
+
+        // Ajout du graphique à la zone graphPane
+        graphPane.getChildren().clear();
+        graphPane.getChildren().add(barChart);
+    }
+
+
+
+
+
+
+
+
 
     private void openCsv() {
         Stage stage = new Stage();
@@ -280,43 +395,33 @@ public class SisFranceView {
 
 
     @FXML
-    private void onCarteMenuchange(){
-        graph1.setOnAction(event -> {
-            if (graph1.getText().equals("Carte")){
-                carte.setText("Carte");
-                graph1.setText("Graphique 1");
-            }
-            else {
-                carte.setText("Graphique 1");
-                graph1.setText("Carte");
-                graph2.setText("Graphique 2");
-                graph3.setText("Graphique 3");
-            }
-        });
-        graph2.setOnAction(event -> {
-            if (graph2.getText().equals("Carte")){
-                carte.setText("Carte");
-                graph2.setText("Graphique 2");
-            }
-            else {
-                carte.setText("Graphique 2");
-                graph2.setText("Carte");
-                graph1.setText("Graphique 1");
-                graph3.setText("Graphique 3");
-            }
-        });
-        graph3.setOnAction(event -> {
-            if (graph3.getText().equals("Carte")){
-                carte.setText("Carte");
-                graph3.setText("Graphique 3");
-            }
-            else {
-                carte.setText("Graphique 3");
-                graph3.setText("Carte");
-                graph1.setText("Graphique 1");
-                graph2.setText("Graphique 2");
-            }
-        });
+    private void onCarteMenuchange() {
+        if (carte.getText().equals("Graphique 1")) {
+            carte.setText("Carte");
+            graph1.setText("Graphique 1");
+            graphPane.getChildren().clear(); // Efface le graphique précédent
+            map.setVisible(true); // Affiche la carte
+        } else if (carte.getText().equals("Graphique 2")) {
+            carte.setText("Carte");
+            graph2.setText("Graphique 2");
+            graphPane.getChildren().clear(); // Efface le graphique précédent
+            map.setVisible(true); // Affiche la carte
+        } else if (carte.getText().equals("Graphique 3")) {
+            carte.setText("Carte");
+            graph3.setText("Graphique 3");
+            graphPane.getChildren().clear(); // Efface le graphique précédent
+            map.setVisible(true); // Affiche la carte
+        } else {
+            carte.setText("Graphique 1");
+            graph1.setText("Carte");
+            graph2.setText("Graphique 2");
+            graph3.setText("Graphique 3");
+            graphPane.getChildren().clear(); // Efface le graphique précédent
+            map.setVisible(false); // Cache la carte
+            afficherGraphique1(donneesSismiques); // Affiche le graphique 1 en utilisant les données pertinentes
 
+        }
     }
+
+
 }
