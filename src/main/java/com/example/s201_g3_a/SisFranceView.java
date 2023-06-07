@@ -1,17 +1,24 @@
 package com.example.s201_g3_a;
 
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -19,6 +26,15 @@ import javafx.scene.web.WebView;
 public class SisFranceView {
 
     private SisFranceViewModel viewModel;
+
+    @FXML
+    private MenuItem importer;
+    @FXML
+    private MenuItem exporter;
+
+    @FXML
+    private MenuItem openCsv;
+
 
     public void setViewModel(SisFranceViewModel viewModel) {
         this.viewModel = viewModel;
@@ -34,6 +50,44 @@ public class SisFranceView {
     private MenuItem graph3;
     @FXML
     private WebView map;
+
+    private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
+
+    private class DonneesSismiques {
+        String identifiant;
+        String date;
+        String heure;
+        String intensite;
+        String qualite;
+        String nom;
+        String region;
+        String choc;
+
+        DonneesSismiques(String identifiant, String date, String heure, String intensite, String qualite, String nom, String region, String choc) {
+            this.identifiant = identifiant;
+            this.date = date;
+            this.heure = heure;
+            this.intensite = intensite;
+            this.qualite = qualite;
+            this.nom = nom;
+            this.region = region;
+            this.choc = choc;
+        }
+    }
+
+    public class Data {
+        private String identifiant;
+        private String date;
+        private String heure;
+        private String intensiteEpicentrale;
+        private String qualiteIntensiteEpicentrale;
+        private String nom;
+        private String regionEpicentrale;
+        private String choc;
+
+        // Ajouter ici les getters et les setters pour chaque champ
+    }
+
 
 
     @FXML
@@ -120,7 +174,99 @@ public class SisFranceView {
                 + "\n"
                 + "</html>");
 
+
+        importer.setOnAction(event -> importerDonneesCsv());
+        exporter.setOnAction(event -> exporterDonneesCsv());
+        openCsv.setOnAction(event -> openCsv());
     }
+
+    private void openCsv() {
+        Stage stage = new Stage();
+        stage.setTitle("Visionneur de CSV");
+
+        TableView<ObservableList<String>> tableView = new TableView<>();
+
+        // Supposons que vos données CSV aient 8 colonnes
+        String[] columnNames = {"Identifiant", "Date (AAAA/MM/JJ)", "Heure", "Intensité épicentrale",
+                "Qualité intensité épicentrale", "Nom", "Région épicentrale", "Choc"};
+
+        for (int i = 0; i < columnNames.length; i++) {
+            final int columnIndex = i;
+            TableColumn<ObservableList<String>, String> column = new TableColumn<>(columnNames[i]);
+            column.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().get(columnIndex)));
+            tableView.getColumns().add(column);
+        }
+
+        // Ajoutez les données à la TableView
+        for (DonneesSismiques row : donneesSismiques) {
+            ObservableList<String> rowData = FXCollections.observableArrayList();
+            rowData.add(row.identifiant);
+            rowData.add(row.date);
+            rowData.add(row.heure);
+            rowData.add(row.intensite);
+            rowData.add(row.qualite);
+            rowData.add(row.nom);
+            rowData.add(row.region);
+            rowData.add(row.choc);
+            tableView.getItems().add(rowData);
+        }
+
+        // Ajoutez la TableView à la nouvelle fenêtre et affichez-la
+        stage.setScene(new Scene(tableView));
+        stage.show();
+    }
+
+
+
+
+
+
+    private void importerDonneesCsv() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
+        fileChooser.setTitle("Ouvrir fichier CSV");
+
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                br.readLine(); // ignore header
+                while ((line = br.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (parts.length >= 9) {
+                        DonneesSismiques ds = new DonneesSismiques(parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8]);
+                        donneesSismiques.add(ds);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void exporterDonneesCsv() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
+        fileChooser.setTitle("Sauvegarder fichier CSV");
+
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null) {
+            try {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+                bw.write("\"\",\"Identifiant\",\"Date (AAAA/MM/JJ)\",\"Heure\",\"Intensité épicentrale\",\"Qualité intensité épicentrale\",\"Nom\",\"Région épicentrale\",\"Choc\"\n");
+                for (DonneesSismiques ds : donneesSismiques) {
+                    bw.write("\"\"" + "," + ds.identifiant + "," + ds.date + "," + ds.heure + "," + ds.intensite + "," + ds.qualite + "," + ds.nom + "," + ds.region + "," + ds.choc + "\n");
+                }
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
     @FXML
     private void onCarteMenuchange(){
         graph1.setOnAction(event -> {
