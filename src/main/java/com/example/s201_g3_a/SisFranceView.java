@@ -282,7 +282,7 @@ public class SisFranceView {
     @FXML
     private void onCarteMenuchange(){
         graph1.setOnAction(event -> {
-            if (graph1.getText()=="Carte"){
+            if (graph1.getText().equals("Carte")){
                 carte.setText("Carte");
                 graph1.setText("Graphique 1");
             }
@@ -294,7 +294,7 @@ public class SisFranceView {
             }
         });
         graph2.setOnAction(event -> {
-            if (graph2.getText()=="Carte"){
+            if (graph2.getText().equals("Carte")){
                 carte.setText("Carte");
                 graph2.setText("Graphique 2");
             }
@@ -306,7 +306,7 @@ public class SisFranceView {
             }
         });
         graph3.setOnAction(event -> {
-            if (graph3.getText()=="Carte"){
+            if (graph3.getText().equals("Carte")){
                 carte.setText("Carte");
                 graph3.setText("Graphique 3");
             }
