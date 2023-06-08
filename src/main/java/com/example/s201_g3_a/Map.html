@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
     <!-- leafletjs JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <script src="./SisFranceView.java"></script>
     <style>
         /* Carte plein écran */
         html,
@@ -22,9 +23,9 @@
         }
     </style>
 </head>
-<body>
+<body onload="initialize()">
 <!-- L'endroit ou la carte va s'afficher -->
-<div id="map"></div>
+<div id="map" ></div>
 <script>
     /* Les options pour afficher la France */
     const mapOptions = {

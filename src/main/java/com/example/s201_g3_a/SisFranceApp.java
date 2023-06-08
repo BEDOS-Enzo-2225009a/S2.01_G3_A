@@ -11,7 +11,10 @@ import java.io.IOException;
 public class SisFranceApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        System.setProperty("javafx.platform", "desktop");
+        System.setProperty("http.agent", "Gluon Mobile/1.0.3");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SisFrance-view.fxml"));
+
         Parent root = fxmlLoader.load();
 
         SisFranceView view = fxmlLoader.getController();
