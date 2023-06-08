@@ -47,15 +47,15 @@
                                     <TextField layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
                                     <Label layoutX="20.0" layoutY="98.0" text="Date" />
                            <Label layoutX="25.0" layoutY="180.0" text="À :" />
-                           <ChoiceBox layoutX="28.0" layoutY="200.0" prefHeight="24.0" prefWidth="58.0" />
-                           <ChoiceBox layoutX="101.0" layoutY="200.0" prefHeight="24.0" prefWidth="58.0" />
-                           <ChoiceBox layoutX="173.0" layoutY="200.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox fx:id="aDay" layoutX="28.0" layoutY="200.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox fx:id="aMonth" layoutX="101.0" layoutY="200.0" prefHeight="24.0" prefWidth="58.0" />
+                           <ChoiceBox fx:id="aYear" layoutX="173.0" layoutY="200.0" prefHeight="24.0" prefWidth="58.0" />
                            <Label layoutX="25.0" layoutY="123.0" text="De :" />
-                                    <ChoiceBox layoutX="28.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
-                                    <ChoiceBox layoutX="101.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
-                                    <ChoiceBox layoutX="173.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
+                                    <ChoiceBox fx:id="deDay" layoutX="28.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
+                                    <ChoiceBox fx:id="deMonth" layoutX="101.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
+                                    <ChoiceBox fx:id="deYear" layoutX="173.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
                            <Label layoutX="20.0" layoutY="240.0" text="Département" />
-                           <ChoiceBox layoutX="50.0" layoutY="270.0" prefWidth="150.0" fx:id="regionChoiceBox"/>
+                           <ChoiceBox fx:id="regionChoiceBox" layoutX="50.0" layoutY="270.0" prefWidth="150.0" />
                            <Button layoutX="85.0" layoutY="320.0" mnemonicParsing="false" text="Rechercher" />
                                 </children>
                             </AnchorPane>

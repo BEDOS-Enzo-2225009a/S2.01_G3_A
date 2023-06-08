@@ -61,6 +61,18 @@ public class SisFranceView {
 
     @FXML
     private ChoiceBox<String> regionChoiceBox;
+    @FXML
+    private ChoiceBox<Integer> deDay;
+    @FXML
+    private ChoiceBox<Integer> aDay;
+    @FXML
+    private ChoiceBox<Integer> deMonth;
+    @FXML
+    private ChoiceBox<Integer> aMonth;
+    @FXML
+    private ChoiceBox<Integer> deYear;
+    @FXML
+    private ChoiceBox<Integer> aYear;
 
     private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
 
@@ -323,7 +335,6 @@ public class SisFranceView {
             tableView.getItems().add(rowData);
         }
 
-        getAllRegions();
 
         // Créez une FilteredList pour filtrer les données en fonction du champ de recherche
         FilteredList<ObservableList<String>> filteredData = new FilteredList<>(tableView.getItems(), p -> true);
@@ -385,6 +396,7 @@ public class SisFranceView {
                 e.printStackTrace();
             }
         }
+        getCsvInfoFXML();
     }
 
     private void exporterDonneesCsv() {
@@ -438,9 +450,31 @@ public class SisFranceView {
         }
     }
 
+    private ArrayList<Integer> dateDayMonth(int quantite) {
+        ArrayList<Integer> qdate = new ArrayList<>();
+
+        for(int i = 1; i < quantite + 1; ++i){
+            qdate.add(i);
+        }
+        return qdate;
+    }
+
+    private ArrayList<Integer> dateYear(int from, int to) {
+        ArrayList<Integer> qdate = new ArrayList<>();
+        int i = from;
+
+        while (i < to + 1) {
+            qdate.add(i);
+            ++i;
+        }
+        return qdate;
+    }
+
 
     @FXML
-    private void getAllRegions() {
+    private void getCsvInfoFXML() {
+
+        // Regions
         ArrayList<String> regions = new ArrayList<>();
 
         for (DonneesSismiques row : donneesSismiques) {
@@ -450,7 +484,18 @@ public class SisFranceView {
             }
         }
 
-        // Ajout des régions à la ChoiceBox
+        // Ajout des ChoiceBox
         regionChoiceBox.getItems().addAll(regions);
+        deDay.getItems().addAll(dateDayMonth(31));
+        aDay.getItems().addAll(dateDayMonth(31));
+        deMonth.getItems().addAll(dateDayMonth(12));
+        aMonth.getItems().addAll(dateDayMonth(12));
+        deYear.getItems().addAll(dateYear(1900, 2050));
+        aYear.getItems().addAll(dateYear(1900, 2050));
     }
+
+
+
 }
+
+
