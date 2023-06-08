@@ -18,7 +18,7 @@ Yoni SAFRAN --> [**Yonisfrn**](https://github.com/YoniSAFRANS22002518) / YoniSAF
 -  `README.md`
 -  `mvnw`
 -  `mvnw.cmd`
--  `pom.xm
+-  `pom.xm`
 
 ## Structure du projet
 ```markdown
