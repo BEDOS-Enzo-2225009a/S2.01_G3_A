@@ -55,7 +55,7 @@
                                     <ChoiceBox layoutX="101.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
                                     <ChoiceBox layoutX="173.0" layoutY="150.0" prefHeight="24.0" prefWidth="58.0" />
                            <Label layoutX="20.0" layoutY="240.0" text="Département" />
-                           <ChoiceBox layoutX="50.0" layoutY="270.0" prefWidth="150.0" />
+                           <ChoiceBox layoutX="50.0" layoutY="270.0" prefWidth="150.0" fx:id="regionChoiceBox"/>
                            <Button layoutX="85.0" layoutY="320.0" mnemonicParsing="false" text="Rechercher" />
                                 </children>
                             </AnchorPane>

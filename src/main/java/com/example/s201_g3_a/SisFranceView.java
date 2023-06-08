@@ -59,6 +59,9 @@ public class SisFranceView {
     @FXML
     private Pane paneMG;
 
+    @FXML
+    private ChoiceBox<String> regionChoiceBox;
+
     private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
 
     private class DonneesSismiques { // Classe que j'ai créé pour pourvoir classer les données. Si vous voulez réutiliser les données importées par l'import d'un fichier CSV, il faut utiliser la liste
@@ -71,6 +74,8 @@ public class SisFranceView {
         private String nom;
         private String region;
         private String choc;
+
+
 
         public DonneesSismiques(String identifiant, String date, String heure, String intensite, String qualite, String nom, String region, String choc) {
             this.identifiant = identifiant;
@@ -318,6 +323,8 @@ public class SisFranceView {
             tableView.getItems().add(rowData);
         }
 
+        getAllRegions();
+
         // Créez une FilteredList pour filtrer les données en fonction du champ de recherche
         FilteredList<ObservableList<String>> filteredData = new FilteredList<>(tableView.getItems(), p -> true);
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -432,4 +439,18 @@ public class SisFranceView {
     }
 
 
+    @FXML
+    private void getAllRegions() {
+        ArrayList<String> regions = new ArrayList<>();
+
+        for (DonneesSismiques row : donneesSismiques) {
+            String region = row.region;
+            if (!regions.contains(region)) {
+                regions.add(region);
+            }
+        }
+
+        // Ajout des régions à la ChoiceBox
+        regionChoiceBox.getItems().addAll(regions);
+    }
 }
