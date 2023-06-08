@@ -7,17 +7,21 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.chart.*;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 
 public class SisFranceView {
 
@@ -51,6 +55,9 @@ public class SisFranceView {
     private MenuItem graph3;
     @FXML
     private WebView map;
+
+    @FXML
+    private Pane paneMG;
 
     private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
 
@@ -149,7 +156,8 @@ public class SisFranceView {
     private void initialize()
     {
         WebEngine engine = map.getEngine();
-        engine.loadContent("<!DOCTYPE html>\n"
+        engine.loadContent(
+                "<!DOCTYPE html>\n"
                 + "<html lang=\"fr\">\n"
                 + "\n"
                 + "<head>\n"

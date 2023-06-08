@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-<?import javafx.scene.web.WebView?>
 <VBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceView">
     <BorderPane prefHeight="773.0" prefWidth="1186.0">
         <top>
@@ -11,7 +12,7 @@
                     <Menu fx:id="data" text="Data">
                         <items>
                             <MenuItem fx:id="importer" text="Importer" />
-                            <MenuItem mnemonicParsing="false" fx:id="exporter" text="Exporter" />
+                            <MenuItem fx:id="exporter" mnemonicParsing="false" text="Exporter" />
                             <SeparatorMenuItem />
                             <MenuItem fx:id="openCsv" text="Open CSV" />
                         </items>
@@ -27,11 +28,11 @@
             </MenuBar>
         </top>
         <center>
-            <Pane id="pane">
-                <StackPane>
-                    <WebView fx:id="map" />
-                    <Pane id="graphPane" fx:id="graphPane" />
-                </StackPane>
+            <Pane fx:id="paneMG">
+
+                <WebView fx:id="map" prefHeight="747.0" prefWidth="1186.0" />
+                <Pane id="graphPane" fx:id="graphPane" />
+
             </Pane>
         </center>
         <right>
