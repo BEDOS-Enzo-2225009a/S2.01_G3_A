@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class SisFranceView {
@@ -459,11 +460,13 @@ public class SisFranceView {
         return qdate;
     }
 
-    private ArrayList<Integer> dateYear(int from, int to) {
+    private ArrayList<Integer> dateYear(int from) {
         ArrayList<Integer> qdate = new ArrayList<>();
         int i = from;
+        Calendar c = Calendar.getInstance();
+        int actualYear = c.get(Calendar.YEAR);
 
-        while (i < to + 1) {
+        while (i < actualYear + 1) {
             qdate.add(i);
             ++i;
         }
@@ -490,8 +493,8 @@ public class SisFranceView {
         aDay.getItems().addAll(dateDayMonth(31));
         deMonth.getItems().addAll(dateDayMonth(12));
         aMonth.getItems().addAll(dateDayMonth(12));
-        deYear.getItems().addAll(dateYear(1900, 2050));
-        aYear.getItems().addAll(dateYear(1900, 2050));
+        deYear.getItems().addAll(dateYear(1600));
+        aYear.getItems().addAll(dateYear(1600));
     }
 
 
