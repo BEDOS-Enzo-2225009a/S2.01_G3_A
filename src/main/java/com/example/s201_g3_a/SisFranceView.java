@@ -20,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -63,17 +64,9 @@ public class SisFranceView {
     @FXML
     private ChoiceBox<String> regionChoiceBox;
     @FXML
-    private ChoiceBox<Integer> deDay;
+    private ChoiceBox<Integer> fromDate;
     @FXML
-    private ChoiceBox<Integer> aDay;
-    @FXML
-    private ChoiceBox<Integer> deMonth;
-    @FXML
-    private ChoiceBox<Integer> aMonth;
-    @FXML
-    private ChoiceBox<Integer> deYear;
-    @FXML
-    private ChoiceBox<Integer> aYear;
+    private ChoiceBox<Integer> toDate;
 
     private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
 
@@ -451,26 +444,15 @@ public class SisFranceView {
         }
     }
 
-    private ArrayList<Integer> dateDayMonth(int quantite) {
-        ArrayList<Integer> qdate = new ArrayList<>();
-
-        for(int i = 1; i < quantite + 1; ++i){
-            qdate.add(i);
-        }
-        return qdate;
-    }
-
-    private ArrayList<Integer> dateYear(int from) {
-        ArrayList<Integer> qdate = new ArrayList<>();
-        int i = from;
+    private ArrayList<Integer> getFirstLastDate(){
+        ArrayList<Integer> dates = new ArrayList<>();
         Calendar c = Calendar.getInstance();
         int actualYear = c.get(Calendar.YEAR);
 
-        while (i < actualYear + 1) {
-            qdate.add(i);
-            ++i;
+        for(int i = 1600; i < actualYear + 1; ++i){
+            dates.add(i);
         }
-        return qdate;
+        return dates;
     }
 
 
@@ -486,15 +468,14 @@ public class SisFranceView {
                 regions.add(region);
             }
         }
+        // Dates
+        ArrayList<Integer> dates = getFirstLastDate();
 
         // Ajout des ChoiceBox
         regionChoiceBox.getItems().addAll(regions);
-        deDay.getItems().addAll(dateDayMonth(31));
-        aDay.getItems().addAll(dateDayMonth(31));
-        deMonth.getItems().addAll(dateDayMonth(12));
-        aMonth.getItems().addAll(dateDayMonth(12));
-        deYear.getItems().addAll(dateYear(1600));
-        aYear.getItems().addAll(dateYear(1600));
+        fromDate.getItems().addAll(dates);
+        toDate.getItems().addAll(dates);
+
     }
 
 
