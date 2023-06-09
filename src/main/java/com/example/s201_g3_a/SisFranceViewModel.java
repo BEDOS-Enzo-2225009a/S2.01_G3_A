@@ -5,8 +5,15 @@ public class SisFranceViewModel {
 
     private SisFranceModel model;
 
-    public void setModel(SisFranceModel model) {
+
+    public SisFranceViewModel() {
+
+    }
+
+    public SisFranceViewModel(SisFranceModel model) {
         this.model = model;
     }
 }
+
+
 

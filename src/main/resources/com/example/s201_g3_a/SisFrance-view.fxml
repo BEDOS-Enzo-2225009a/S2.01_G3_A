@@ -30,10 +30,8 @@
             </MenuBar>
         </top>
         <center>
-            <Pane fx:id="paneMG">
-
-                <!--                <WebView fx:id="map" prefHeight="747.0" prefWidth="1186.0" />-->
-                <Pane id="graphPane" fx:id="graphPane" />
+            <Pane id="graphPane" fx:id="graphPane" >
+                <Pane fx:id="graph" />
             </Pane>
             <MapView fx:id="map" zoom="6"></MapView>
 
@@ -50,13 +48,13 @@
                                     <TextField layoutX="28.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Minimum" />
                                     <TextField layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
                                     <Label layoutX="20.0" layoutY="98.0" text="Date" />
-                           <Label layoutX="25.0" layoutY="180.0" text="À :" />
-                           <Label layoutX="25.0" layoutY="123.0" text="De :" />
-                           <Label layoutX="20.0" layoutY="240.0" text="Département" />
-                           <ChoiceBox fx:id="regionChoiceBox" layoutX="50.0" layoutY="270.0" prefWidth="150.0" />
-                           <Button layoutX="85.0" layoutY="320.0" mnemonicParsing="false" text="Rechercher" />
-                           <ChoiceBox fx:id="fromDate" layoutX="50.0" layoutY="148.0" prefWidth="150.0" />
-                           <ChoiceBox fx:id="toDate" layoutX="50.0" layoutY="206.0" prefWidth="150.0" />
+                                    <Label layoutX="25.0" layoutY="180.0" text="À :" />
+                                    <Label layoutX="25.0" layoutY="123.0" text="De :" />
+                                    <Label layoutX="20.0" layoutY="240.0" text="Département" />
+                                    <ChoiceBox fx:id="regionChoiceBox" layoutX="50.0" layoutY="270.0" prefWidth="150.0" />
+                                    <Button layoutX="85.0" layoutY="320.0" mnemonicParsing="false" text="Rechercher" />
+                                    <ChoiceBox fx:id="fromDate" layoutX="50.0" layoutY="148.0" prefWidth="150.0" />
+                                    <ChoiceBox fx:id="toDate" layoutX="50.0" layoutY="206.0" prefWidth="150.0" />
                                 </children>
                             </AnchorPane>
                         </content>
