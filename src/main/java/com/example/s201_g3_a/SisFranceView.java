@@ -1,6 +1,9 @@
 package com.example.s201_g3_a;
 
 
+import com.gluonhq.maps.MapLayer;
+import com.gluonhq.maps.MapPoint;
+import com.gluonhq.maps.MapView;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,25 +31,14 @@ import java.util.List;
 public class SisFranceView {
 
     private SisFranceViewModel viewModel;
-
     @FXML
     private Pane graphPane; // Pane pour afficher le graphique
-
-
-
     @FXML
     private MenuItem importer;
     @FXML
     private MenuItem exporter;
-
     @FXML
     private MenuItem openCsv;
-
-
-    public void setViewModel(SisFranceViewModel viewModel) {
-        this.viewModel = viewModel;
-
-    }
     @FXML
     private Menu carte;
     @FXML
@@ -56,11 +48,11 @@ public class SisFranceView {
     @FXML
     private MenuItem graph3;
     @FXML
-    private WebView map;
-
+    private MapView map;
+    private MapLayer Map;
+    private MapPoint point;
     @FXML
     private Pane paneMG;
-
     @FXML
     private ChoiceBox<String> regionChoiceBox;
     @FXML
@@ -68,8 +60,25 @@ public class SisFranceView {
     @FXML
     private ChoiceBox<Integer> toDate;
 
+    public void setViewModel(SisFranceViewModel viewModel) {
+        this.viewModel = viewModel;
+
+    }
     private List<DonneesSismiques> donneesSismiques = new ArrayList<>();
 
+
+    @FXML
+    private void initialize()
+    {
+        /* initialisation de la map vers la france */
+        point = new MapPoint(46.2276,2.2137);
+        map.flyTo(0,point,0.1);
+
+
+        importer.setOnAction(event -> importerDonneesCsv());
+        exporter.setOnAction(event -> exporterDonneesCsv());
+        openCsv.setOnAction(event -> openCsv());
+    }
     private class DonneesSismiques { // Classe que j'ai créé pour pourvoir classer les données. Si vous voulez réutiliser les données importées par l'import d'un fichier CSV, il faut utiliser la liste
         // donneesSismiques que j'ai créée juste en haut. Elle contient après l'import tout ce qu'il faut pour utiliser les données du CSV.
         private String identifiant;
@@ -81,8 +90,6 @@ public class SisFranceView {
         private String region;
         private String choc;
 
-
-
         public DonneesSismiques(String identifiant, String date, String heure, String intensite, String qualite, String nom, String region, String choc) {
             this.identifiant = identifiant;
             this.date = date;
@@ -93,165 +100,30 @@ public class SisFranceView {
             this.region = region;
             this.choc = choc;
         }
-
         public String getIdentifiant() {
             return identifiant;
         }
-
-        public void setIdentifiant(String identifiant) {
-            this.identifiant = identifiant;
-        }
-
         public String getDate() {
             return date;
         }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-
         public String getHeure() {
             return heure;
         }
-
-        public void setHeure(String heure) {
-            this.heure = heure;
-        }
-
         public String getIntensite() {
             return intensite;
         }
-
-        public void setIntensite(String intensite) {
-            this.intensite = intensite;
-        }
-
         public String getQualite() {
             return qualite;
         }
-
-        public void setQualite(String qualite) {
-            this.qualite = qualite;
-        }
-
         public String getNom() {
             return nom;
         }
-
-        public void setNom(String nom) {
-            this.nom = nom;
-        }
-
         public String getRegion() {
             return region;
         }
-
-        public void setRegion(String region) {
-            this.region = region;
-        }
-
         public String getChoc() {
             return choc;
         }
-
-        public void setChoc(String choc) {
-            this.choc = choc;
-        }
-    }
-
-
-
-
-
-    @FXML
-    private void initialize()
-    {
-        WebEngine engine = map.getEngine();
-        engine.loadContent(
-                "<!DOCTYPE html>\n"
-                + "<html lang=\"fr\">\n"
-                + "\n"
-                + "<head>\n"
-                + "    <meta charset=\"UTF-8\">\n"
-                + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-                + "    <title>Carte</title>\n"
-                + "    <!-- leafletjs CSS -->\n"
-                + "    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css\" />\n"
-                + "    <!-- leafletjs JS -->\n"
-                + "    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js\"></script>\n"
-                + "    <style>\n"
-                + "        /* Carte plein écran */\n"
-                + "        html,\n"
-                + "        body {\n"
-                + "            margin: 0;\n"
-                + "            height: 100%;\n"
-                + "        }\n"
-                + "\n"
-                + "        #map {\n"
-                + "            width: 100%;\n"
-                + "            height: 100%;\n"
-                + "        }\n"
-                + "    </style>\n"
-                + "</head>\n"
-                + "\n"
-                + "<body>\n"
-                + "\n"
-                + "    <!-- L'endroit ou la carte va s'afficher -->\n"
-                + "    <div id=\"map\"></div>\n"
-                + "\n"
-                + "    <script>\n"
-                + "        /* Les options pour afficher la France */\n"
-                + "        const mapOptions = {\n"
-                + "            center: [46.225, 0.132],\n"
-                + "            zoom: 6\n"
-                + "        }\n"
-                + "\n"
-                + "        /* Les options pour affiner la localisation */\n"
-                + "        const locationOptions = {\n"
-                + "            maximumAge: 10000,\n"
-                + "            timeout: 5000,\n"
-                + "            enableHighAccuracy: true\n"
-                + "        };\n"
-                + "\n"
-                + "        /* Création de la carte */\n"
-                + "        var map = new L.map(\"map\", mapOptions);\n"
-                + "\n"
-                + "        /* Création de la couche OpenStreetMap */\n"
-                + "        var layer = new L.TileLayer(\"http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png\",\n"
-                + "            { attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors' });\n"
-                + "\n"
-                + "        /* Ajoute la couche de la carte */\n"
-                + "        map.addLayer(layer);\n"
-                + "\n"
-                + "        /* Verifie que le navigateur est compatible avec la géolocalisation */\n"
-                + "        if (\"geolocation\" in navigator) {\n"
-                + "            navigator.geolocation.getCurrentPosition(handleLocation, handleLocationError, locationOptions);\n"
-                + "        } else {\n"
-                + "            /* Le navigateur n'est pas compatible */\n"
-                + "            alert(\"Géolocalisation indisponible\");\n"
-                + "        }\n"
-                + "\n"
-                + "        function handleLocation(position) {\n"
-                + "            /* Zoom avant de trouver la localisation */\n"
-                + "            map.setZoom(16);\n"
-                + "            /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */\n"
-                + "            map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));\n"
-                + "        }\n"
-                + "\n"
-                + "        function handleLocationError(msg) {\n"
-                + "            alert(\"Erreur lors de la géolocalisation\");\n"
-                + "        }\n"
-                + "\n"
-                + "    </script>\n"
-                + "\n"
-                + "</body>\n"
-                + "\n"
-                + "</html>");
-
-
-        importer.setOnAction(event -> importerDonneesCsv());
-        exporter.setOnAction(event -> exporterDonneesCsv());
-        openCsv.setOnAction(event -> openCsv());
     }
 
     private void afficherGraphique1(List<DonneesSismiques> donnees) {
@@ -288,14 +160,6 @@ public class SisFranceView {
         graphPane.getChildren().add(barChart);
     }
 
-
-
-
-
-
-
-
-
     private void openCsv() {
         Stage stage = new Stage();
         stage.setTitle("Visionneur de CSV");
@@ -329,7 +193,6 @@ public class SisFranceView {
             tableView.getItems().add(rowData);
         }
 
-
         // Créez une FilteredList pour filtrer les données en fonction du champ de recherche
         FilteredList<ObservableList<String>> filteredData = new FilteredList<>(tableView.getItems(), p -> true);
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -361,12 +224,6 @@ public class SisFranceView {
         stage.setScene(new Scene(vbox));
         stage.show();
     }
-
-
-
-
-
-
 
     private void importerDonneesCsv() {
         FileChooser fileChooser = new FileChooser();
@@ -412,8 +269,6 @@ public class SisFranceView {
             }
         }
     }
-
-
 
     @FXML
     private void onCarteMenuchange() {
