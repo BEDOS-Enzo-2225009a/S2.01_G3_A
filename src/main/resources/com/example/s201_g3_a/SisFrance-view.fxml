@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.maps.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.web.*?>
 
-<?import com.gluonhq.maps.MapView?>
-<?import com.gluonhq.maps.MapLayer?>
 <VBox stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.s201_g3_a.SisFranceView">
     <BorderPane prefHeight="773.0" prefWidth="1186.0">
         <top>
@@ -35,7 +33,7 @@
                 <!--                <WebView fx:id="map" prefHeight="747.0" prefWidth="1186.0" />-->
                 <Pane id="graphPane" fx:id="graphPane" />
             </Pane>
-            <MapView fx:id="map" zoom="6"></MapView>
+            <MapView fx:id="map" zoom="6" />
 
 
         </center>
@@ -51,12 +49,18 @@
                                     <TextField layoutX="139.0" layoutY="54.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
                                     <Label layoutX="20.0" layoutY="98.0" text="Date" />
                            <Label layoutX="25.0" layoutY="180.0" text="À :" />
+                           <ChoiceBox fx:id="fromDate" layoutX="50.0" layoutY="148.0" prefWidth="150.0" />
                            <Label layoutX="25.0" layoutY="123.0" text="De :" />
+                           <ChoiceBox fx:id="toDate" layoutX="50.0" layoutY="206.0" prefWidth="150.0" />
                            <Label layoutX="20.0" layoutY="240.0" text="Département" />
                            <ChoiceBox fx:id="regionChoiceBox" layoutX="50.0" layoutY="270.0" prefWidth="150.0" />
-                           <Button layoutX="85.0" layoutY="320.0" mnemonicParsing="false" text="Rechercher" />
-                           <ChoiceBox fx:id="fromDate" layoutX="50.0" layoutY="148.0" prefWidth="150.0" />
-                           <ChoiceBox fx:id="toDate" layoutX="50.0" layoutY="206.0" prefWidth="150.0" />
+                           <Label layoutX="20.0" layoutY="320.0" text="Longitude" />
+                           <TextField layoutX="28.0" layoutY="350.0" prefHeight="25.0" prefWidth="85.0" promptText="Minimum" />
+                           <TextField layoutX="139.0" layoutY="350.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
+                           <Label layoutX="20.0" layoutY="390.0" text="Latitude" />
+                           <TextField layoutX="28.0" layoutY="420.0" prefHeight="25.0" prefWidth="85.0" promptText="Minimum" />
+                           <TextField layoutX="139.0" layoutY="420.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
+                           <Button layoutX="85.0" layoutY="480.0" mnemonicParsing="false" text="Rechercher" />
                                 </children>
                             </AnchorPane>
                         </content>
