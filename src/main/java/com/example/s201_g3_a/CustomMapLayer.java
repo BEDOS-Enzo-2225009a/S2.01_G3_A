@@ -21,6 +21,7 @@ public class CustomMapLayer extends MapLayer {
                 circle.setCenterX(point2D.getX());
                 circle.setCenterY(point2D.getY());
                 this.getChildren().add(circle);
+                //oe oe
             }
         }
 
