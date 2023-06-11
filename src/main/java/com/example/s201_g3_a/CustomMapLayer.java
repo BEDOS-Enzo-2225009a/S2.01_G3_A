@@ -12,10 +12,14 @@ import java.util.ArrayList;
 public class CustomMapLayer extends MapLayer {
 
 
-        public void updateLayer(ArrayList<DonneesSismiques> listeSeismes){
+        public void updateLayer(ArrayList<SisFranceModel> listeSeismes){
             clearLayer();
-            for(DonneesSismiques seisme : listeSeismes){
-                MapPoint point = new MapPoint(seisme.getLatitude(), seisme.getLongitude());
+            for(SisFranceModel seisme : listeSeismes){
+                double latitude = Double.parseDouble(seisme.getLatitude());
+                double longitude = Double.parseDouble(seisme.getLongitude());
+
+                MapPoint point = new MapPoint(latitude, longitude);
+
                 Point2D point2D = getMapPoint(point.getLatitude(),point.getLongitude());
                 Circle circle = new Circle(5, Color.RED);
                 circle.setCenterX(point2D.getX());

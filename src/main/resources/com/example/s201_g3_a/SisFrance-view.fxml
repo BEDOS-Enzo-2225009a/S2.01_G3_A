@@ -19,7 +19,7 @@
                             <MenuItem fx:id="openCsv" text="Open CSV" />
                         </items>
                     </Menu>
-                    <Menu fx:id="carte" mnemonicParsing="false" onAction="#onCarteMenuchange" text="Carte">
+                    <Menu fx:id="carte" mnemonicParsing="false"  text="Carte">
                         <items>
                             <MenuItem fx:id="graph1" mnemonicParsing="false" text="Graphique 1" />
                             <MenuItem fx:id="graph2" mnemonicParsing="false" text="Graphique 2" />

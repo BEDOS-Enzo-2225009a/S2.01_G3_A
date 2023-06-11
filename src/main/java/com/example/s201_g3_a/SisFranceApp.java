@@ -19,10 +19,7 @@ public class SisFranceApp extends Application {
         Parent root = fxmlLoader.load();
 
         SisFranceView view = fxmlLoader.getController();
-        SisFranceViewModel viewModel = new SisFranceViewModel();
-        view.setViewModel(viewModel);
-        SisFranceModel model = new SisFranceModel();
-        viewModel.setModel(model);
+
 
         Scene scene = new Scene(root, 1200, 800);
         stage.setTitle("SisFranceApp");
