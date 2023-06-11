@@ -19,9 +19,9 @@
                             <MenuItem fx:id="openCsv" text="Open CSV" />
                         </items>
                     </Menu>
-                    <Menu fx:id="carte" mnemonicParsing="false" onAction="#onCarteMenuchange" text="Carte">
+                    <Menu fx:id="carte" mnemonicParsing="false"  text="Carte">
                         <items>
-                            <MenuItem fx:id="graph1" mnemonicParsing="false" text="Graphique 1" />
+                            <MenuItem fx:id="graph1" mnemonicParsing="false" text="Graphique 1" onAction="#goToGraph1" />
                             <MenuItem fx:id="graph2" mnemonicParsing="false" text="Graphique 2" />
                             <MenuItem fx:id="graph3" mnemonicParsing="false" text="Graphique 3" />
                         </items>
@@ -30,10 +30,6 @@
             </MenuBar>
         </top>
         <center>
-
-            <Pane fx:id="paneMG">
-                <Pane id="graphPane" fx:id="graphPane" />
-            </Pane>
             <MapView fx:id="map" zoom="6"></MapView>
         </center>
         <right>
