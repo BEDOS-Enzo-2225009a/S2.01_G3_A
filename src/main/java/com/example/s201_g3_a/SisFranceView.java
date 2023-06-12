@@ -1,6 +1,6 @@
 package com.example.s201_g3_a;
 
-
+import com.gluonhq.maps.MapLayer;
 import com.gluonhq.maps.MapPoint;
 import com.gluonhq.maps.MapView;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -56,19 +56,27 @@ public class SisFranceView {
     @FXML
     private Pane paneMG;
 
-
+    private MapLayer mapLayer;
+    private SisFranceModel seisme = new SisFranceModel();
 
 
 
 
 
     @FXML
-    private void initialize()
-    {
+    private void initialize() {
         map.flyTo(0,pointFr,0.1);
-        importer.setOnAction(event -> SisFranceModel.importerDonneesCsv());
+        mapLayer = new CustomMapLayer(); // Instancier la classe CustomMapLayer
+        map.addLayer(mapLayer); // Ajouter la couche de carte à la MapView
+
+        importer.setOnAction(event -> {
+            SisFranceModel.importerDonneesCsv();
+            SisFranceApp.mapLayer.updateLayer(seisme.getDonneesSismiques()); // Mettre à jour la couche de carte avec les nouvelles données CSV
+        });
+
         exporter.setOnAction(event -> SisFranceModel.exporterDonneesCsv());
         openCsv.setOnAction(event -> SisFranceModel.openCsv());
     }
+
 
 }
