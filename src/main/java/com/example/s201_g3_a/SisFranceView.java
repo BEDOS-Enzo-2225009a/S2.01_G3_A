@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebEngine;
@@ -36,25 +37,24 @@ public class SisFranceView {
     @FXML
     private MenuItem openCsv;
 
-
-
-
-
     public void setViewModel(SisFranceViewModel viewModel) {
         this.viewModel = viewModel;
 
     }
+
     @FXML
     private Menu carte;
 
     @FXML
     private MapView map;
+
+
     @FXML
-    private static MapPoint pointFr = new MapPoint(46,2);
+    private static MapPoint pointFr = new MapPoint(46, 2);
     @FXML
     private Pane paneMG;
 
-    public static CustomMapLayer mapLayer ;
+    public static CustomMapLayer mapLayer;
     private List<SisFranceModel> seisme = new ArrayList<SisFranceModel>();
 
     @FXML
@@ -65,7 +65,8 @@ public class SisFranceView {
     private ChoiceBox<Integer> toDate;
 
 
-
+    @FXML
+    private TitledPane filterPane;
 
     @FXML
     private void initialize() {
@@ -73,6 +74,10 @@ public class SisFranceView {
         exporter.setOnAction(event -> SisFranceModel.exporterDonneesCsv());
         openCsv.setOnAction(event -> SisFranceModel.openCsv());
 
+        map.setMinHeight(800);
+//        map.setMinWidth(1100);
+        filterPane.toFront();
+        filterPane.setCollapsible(false);
 
         if (map != null) {
             mapLayer = new CustomMapLayer(seisme);
@@ -84,12 +89,13 @@ public class SisFranceView {
             System.out.println("");
         }
     }
-    private ArrayList<Integer> getFirstLastDate(){
+
+    private ArrayList<Integer> getFirstLastDate() {
         ArrayList<Integer> dates = new ArrayList<>();
         Calendar c = Calendar.getInstance();
         int actualYear = c.get(Calendar.YEAR);
 
-        for(int i = 1600; i < actualYear + 1; ++i){
+        for (int i = 1600; i < actualYear + 1; ++i) {
             dates.add(i);
         }
         return dates;
@@ -244,7 +250,6 @@ public class SisFranceView {
                     dates.add(year);
                 }
             }
-
 
 
             // Mettre à jour les ChoiceBox
