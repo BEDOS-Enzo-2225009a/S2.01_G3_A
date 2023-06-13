@@ -47,7 +47,9 @@ public class CustomMapLayer extends MapLayer {
             }
         }
 
-
+    public void setListeSeismes(List<SisFranceModel> listeSeismes) {
+        this.listeSeismes = listeSeismes;
+    }
 
     protected void layoutLayer() {
         updateLayer();

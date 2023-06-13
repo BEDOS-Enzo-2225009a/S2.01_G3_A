@@ -245,7 +245,7 @@ public class SisFranceModel {
 
                 donneesSismiques.clear();
                 donneesSismiques.addAll(nouvellesDonneesSismiques);
-                mapLayer.setListSeisme();
+                mapLayer.setListeSeismes(donneesSismiques);
             } catch (IOException e) {
                 e.printStackTrace();
             }
