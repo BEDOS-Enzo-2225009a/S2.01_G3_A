@@ -20,7 +20,6 @@ public class SisFranceApp extends Application {
 
         Parent root = fxmlLoader.load();
 
-        SisFranceView view = fxmlLoader.getController();
 
 
 

@@ -6,13 +6,18 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.s201_g3_a.SisFranceView.mapLayer;
 
@@ -20,6 +25,15 @@ import static com.example.s201_g3_a.SisFranceView.mapLayer;
 public class SisFranceModel {
     private String xRgf93L93;
     private String yRgf93L93;
+    @FXML
+    private Pane graphPane; // Pane pour afficher le graphique
+
+    @FXML
+    private MenuItem graph1;
+    @FXML
+    private MenuItem graph2;
+    @FXML
+    private MenuItem graph3;
 
     private static ArrayList<SisFranceModel> donneesSismiques = new ArrayList<>();
     private String identifiant;
@@ -33,12 +47,6 @@ public class SisFranceModel {
     private String intensite;
     private String qualite;
 
-
-
-
-    private class DonneesSismiques {
-
-    }
     public SisFranceModel(String identifiant, String date, String heure, String nom, String region, String choc,
                           String xRgf93L93, String yRgf93L93, String latitudeWGS84, String longitudeWGS84,
                           String intensite, String qualite) {
