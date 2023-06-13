@@ -6,10 +6,12 @@ import com.gluonhq.maps.MapView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.CacheHint;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -24,6 +26,38 @@ import java.io.*;
 import java.util.*;
 
 
+
+
+/**
+
+ Classe de vue pour l'application SisFrance.
+
+ Cette classe gère l'interface utilisateur et les interactions avec l'utilisateur.
+
+ La classe contient des éléments de l'interface utilisateur définis à l'aide de JavaFX,
+
+ tels que des menus, des choix, des cartes, des graphiques, etc.
+
+ Elle communique avec le modèle de données (SisFranceModel) et le modèle de vue (SisFranceViewModel)
+
+ pour effectuer des opérations liées à l'affichage des données sismiques et aux interactions utilisateur.
+
+ La classe utilise des annotations JavaFX (FXML) pour lier les éléments de l'interface utilisateur
+
+ aux méthodes correspondantes dans la classe.
+
+ Exemple d'utilisation :
+
+ SisFranceViewModel viewModel = new SisFranceViewModel();
+
+ SisFranceView view = new SisFranceView();
+
+ view.setViewModel(viewModel);
+
+ @see SisFranceModel
+
+ @see SisFranceViewModel
+ */
 public class SisFranceView {
 
     private SisFranceViewModel viewModel;
@@ -37,22 +71,22 @@ public class SisFranceView {
     @FXML
     private MenuItem openCsv;
 
+
+    /**
+
+     Définit le modèle de vue associé à cette vue.
+     @param viewModel Le modèle de vue à associer
+     */
     public void setViewModel(SisFranceViewModel viewModel) {
         this.viewModel = viewModel;
 
     }
-
-    @FXML
-    private Menu carte;
-
     @FXML
     private MapView map;
 
 
     @FXML
     private static MapPoint pointFr = new MapPoint(46, 2);
-    @FXML
-    private Pane paneMG;
 
     public static CustomMapLayer mapLayer;
     private List<SisFranceModel> seisme = new ArrayList<SisFranceModel>();
@@ -68,6 +102,13 @@ public class SisFranceView {
     @FXML
     private TitledPane filterPane;
 
+
+    /**
+
+     Méthode d'initialisation appelée après que les éléments de l'interface utilisateur ont été chargés.
+
+     Cette méthode configure les actions des menus, la carte, les filtres, etc.
+     */
     @FXML
     private void initialize() {
         importer.setOnAction(event -> importerDonneesCsv());
@@ -79,6 +120,7 @@ public class SisFranceView {
         filterPane.toFront();
         filterPane.setCollapsible(false);
 
+
         if (map != null) {
             mapLayer = new CustomMapLayer(seisme);
             mapLayer.updateLayer();
@@ -88,20 +130,24 @@ public class SisFranceView {
         } else {
             System.out.println("");
         }
-    }
 
-    private ArrayList<Integer> getFirstLastDate() {
-        ArrayList<Integer> dates = new ArrayList<>();
-        Calendar c = Calendar.getInstance();
-        int actualYear = c.get(Calendar.YEAR);
 
-        for (int i = 1600; i < actualYear + 1; ++i) {
-            dates.add(i);
-        }
-        return dates;
+
     }
 
 
+    /**
+
+     Affiche un graphique montrant les intensités sismiques par région.
+
+     Le graphique est créé en utilisant les données du modèle SisFranceModel.
+
+     Les régions et les intensités sont extraits des données et utilisés pour créer un graphique à barres.
+
+     Le graphique est affiché dans une nouvelle fenêtre.
+
+     @throws IOException En cas d'erreur lors de la création de la fenêtre du graphique
+     */
     @FXML
     private void goToGraph1() throws IOException {
         // Extract the relevant data for the graph
@@ -162,6 +208,20 @@ public class SisFranceView {
         stage.show();
     }
 
+    /**
+
+     Affiche un graphique montrant la répartition des séismes dans les 10 régions les plus touchées.
+
+     Le graphique est créé en utilisant les données du modèle SisFranceModel.
+
+     Les régions et le nombre d'occurrences de chaque région sont comptés à partir des données.
+
+     Les régions les plus touchées sont sélectionnées et utilisées pour créer un graphique en secteurs.
+
+     Le graphique est affiché dans une nouvelle fenêtre.
+
+     @throws IOException En cas d'erreur lors de la création de la fenêtre du graphique
+     */
     @FXML
     private void goToGraph2() throws IOException {
         // Exemple de données sélectionnées
@@ -226,6 +286,16 @@ public class SisFranceView {
         stage.show();
     }
 
+    /**
+
+     Importe les données à partir d'un fichier CSV.
+
+     Le fichier CSV est sélectionné à l'aide d'un dialogue de sélection de fichiers.
+
+     Une fois le fichier sélectionné, les données sont chargées dans le modèle SisFranceModel.
+
+     Les régions et les dates des séismes sont extraites des données et utilisées pour mettre à jour les ChoiceBox correspondantes.
+     */
     @FXML
     private void importerDonneesCsv() {
         FileChooser fileChooser = new FileChooser();
