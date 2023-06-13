@@ -26,11 +26,15 @@ Yoni SAFRAN --> [**Yonisfrn**](https://github.com/YoniSAFRANS22002518) / YoniSAF
 │   ├── java
 │   │   ├── com/example/s201_g3_a
 │   │   │   ├── SisFranceApp.java
-│   │   │   ├── SisFranceController.java
+│   │   │   ├── SisFranceModel.java
+│   │   │   ├── SisFranceView.java
+│   │   │   ├── SisFranceViewModel.java
+│   │   │   ├── CustomMapLayer.java
 │   │   ├── module-info.java
 │   ├── resources/com/example/s201_g3_a
-│   │   ├── Carte_france_geo_dep.png
 │   │   ├── SisFrance-view.fxml
+│   │   ├── SisFrance_seisme.csv
+│   │   ├── style.css
 ```
 
 
