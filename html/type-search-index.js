@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.example.s201_g3_a","l":"CustomMapLayer"},{"p":"com.example.s201_g3_a","l":"SisFranceApp"},{"p":"com.example.s201_g3_a","l":"SisFranceModel"},{"p":"com.example.s201_g3_a","l":"SisFranceView"},{"p":"com.example.s201_g3_a","l":"SisFranceViewModel"}];updateSearchResults();
