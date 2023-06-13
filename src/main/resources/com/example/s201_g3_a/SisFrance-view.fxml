@@ -54,7 +54,7 @@
                            <Label layoutX="20.0" layoutY="390.0" text="Latitude" />
                            <TextField layoutX="28.0" layoutY="420.0" prefHeight="25.0" prefWidth="85.0" promptText="Minimum" />
                            <TextField layoutX="139.0" layoutY="420.0" prefHeight="25.0" prefWidth="85.0" promptText="Maximum" />
-                           <Button layoutX="85.0" layoutY="480.0" mnemonicParsing="false" text="Rechercher" />
+                           <Button fx:id="butRecherche" layoutX="60.0" layoutY="480.0" mnemonicParsing="false" text="Rechercher" />
                                 </children>
                             </AnchorPane>
                         </content>
