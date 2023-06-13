@@ -149,7 +149,7 @@ public class SisFranceModel {
         this.qualite = qualite;
     }
 
-    public ArrayList<SisFranceModel> getDonneesSismiques() {
+    public static ArrayList<SisFranceModel> getDonneesSismiques() {
         return donneesSismiques;
     }
 

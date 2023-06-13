@@ -22,8 +22,7 @@
                     <Menu fx:id="carte" mnemonicParsing="false"  text="Carte">
                         <items>
                             <MenuItem fx:id="graph1" mnemonicParsing="false" text="Graphique 1" onAction="#goToGraph1" />
-                            <MenuItem fx:id="graph2" mnemonicParsing="false" text="Graphique 2" />
-                            <MenuItem fx:id="graph3" mnemonicParsing="false" text="Graphique 3" />
+                            <MenuItem fx:id="graph2" mnemonicParsing="false" text="Graphique 2" onAction="#goToGraph2" />
                         </items>
                     </Menu>
                 </menus>
