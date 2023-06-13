@@ -42,10 +42,7 @@ public class SisFranceView {
 
 
 
-    public void setViewModel(SisFranceViewModel viewModel) {
-        this.viewModel = viewModel;
 
-    }
     @FXML
     private Menu carte;
 
@@ -59,7 +56,16 @@ public class SisFranceView {
     public static CustomMapLayer mapLayer ;
     private List<SisFranceModel> seisme = new ArrayList<SisFranceModel>();
 
+    private SisFranceApp MainApp;
 
+    public void setFranceApp(SisFranceApp MainApp) {
+        this.MainApp = MainApp;
+    }
+
+    public void setViewModel(SisFranceViewModel viewModel) {
+        this.viewModel = viewModel;
+
+    }
 
 
 
@@ -70,11 +76,26 @@ public class SisFranceView {
         exporter.setOnAction(event -> SisFranceModel.exporterDonneesCsv());
         openCsv.setOnAction(event -> SisFranceModel.openCsv());
 
-        mapLayer=new CustomMapLayer(seisme);
-        mapLayer.updateLayer();
-        map.flyTo(0,pointFr,0.1);
-        map.addLayer(mapLayer);
+
+        if(map != null ) {
+            mapLayer=new CustomMapLayer(seisme);
+            mapLayer.updateLayer();
+            map.flyTo(0,pointFr,0.1);
+            map.addLayer(mapLayer);
+
+        }
+        else {
+            System.out.println("");
+        }
 
     }
 
+    @FXML
+    public void goToGraph1() throws IOException, InstantiationException, IllegalAccessException {
+        SisFranceApp.showScene("SisFrance-view-Graph.fxml");
+    }
+    @FXML
+    public void goToCarte() throws IOException, InstantiationException, IllegalAccessException {
+        SisFranceApp.showScene("SisFrance-view.fxml");
+    }
 }
