@@ -56,7 +56,8 @@ public class SisFranceView {
     @FXML
     private Pane paneMG;
 
-
+    public static CustomMapLayer mapLayer ;
+    private List<SisFranceModel> seisme = new ArrayList<SisFranceModel>();
 
 
 
@@ -65,10 +66,15 @@ public class SisFranceView {
     @FXML
     private void initialize()
     {
-        map.flyTo(0,pointFr,0.1);
         importer.setOnAction(event -> SisFranceModel.importerDonneesCsv());
         exporter.setOnAction(event -> SisFranceModel.exporterDonneesCsv());
         openCsv.setOnAction(event -> SisFranceModel.openCsv());
+
+        mapLayer=new CustomMapLayer(seisme);
+        mapLayer.updateLayer();
+        map.flyTo(0,pointFr,0.1);
+        map.addLayer(mapLayer);
+
     }
 
 }

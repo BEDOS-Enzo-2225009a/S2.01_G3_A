@@ -19,10 +19,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.s201_g3_a.SisFranceView.mapLayer;
+
+
 public class SisFranceModel {
+    private String xRgf93L93;
+    private String yRgf93L93;
     @FXML
     private Pane graphPane; // Pane pour afficher le graphique
-
 
     @FXML
     private MenuItem graph1;
@@ -31,30 +35,38 @@ public class SisFranceModel {
     @FXML
     private MenuItem graph3;
 
-    private static List<SisFranceModel> donneesSismiques = new ArrayList<>();
+    private static ArrayList<SisFranceModel> donneesSismiques = new ArrayList<>();
     private String identifiant;
     private String date;
     private String heure;
     private String nom;
     private String region;
     private String choc;
-    private String longitude;
-    private String latitude;
+    private String longitudeWGS84; // Nouveau nom de la colonne de longitude en WGS84
+    private String latitudeWGS84; // Nouveau nom de la colonne de latitude en WGS84
     private String intensite;
     private String qualite;
 
     public SisFranceModel(String identifiant, String date, String heure, String nom, String region, String choc,
-                          String longitude, String latitude, String intensite, String qualite) {
+                          String xRgf93L93, String yRgf93L93, String latitudeWGS84, String longitudeWGS84,
+                          String intensite, String qualite) {
         this.identifiant = identifiant;
         this.date = date;
         this.heure = heure;
         this.nom = nom;
         this.region = region;
         this.choc = choc;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.xRgf93L93 = xRgf93L93;
+        this.yRgf93L93 = yRgf93L93;
+        this.latitudeWGS84 = latitudeWGS84;
+        this.longitudeWGS84 = longitudeWGS84;
         this.intensite = intensite;
         this.qualite = qualite;
+    }
+
+
+    public SisFranceModel() {
+
     }
 
     public String getIdentifiant() {
@@ -105,20 +117,20 @@ public class SisFranceModel {
         this.choc = choc;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public String getLongitudeWGS84() {
+        return longitudeWGS84;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setLongitudeWGS84(String longitudeWGS84) {
+        this.longitudeWGS84 = longitudeWGS84;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getLatitudeWGS84() {
+        return latitudeWGS84;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setLatitudeWGS84(String latitudeWGS84) {
+        this.latitudeWGS84 = latitudeWGS84;
     }
 
     public String getIntensite() {
@@ -137,8 +149,9 @@ public class SisFranceModel {
         this.qualite = qualite;
     }
 
-
-
+    public ArrayList<SisFranceModel> getDonneesSismiques() {
+        return donneesSismiques;
+    }
 
     public static void openCsv() {
         Stage stage = new Stage();
@@ -148,9 +161,9 @@ public class SisFranceModel {
         TextField searchField = new TextField(); // Champ de recherche
         searchField.setPromptText("Rechercher des mots-clés, des identifiants, des dates...");
 
-        // Supposons que vos données CSV aient 10 colonnes
+        // Supposons que vos données CSV aient 12 colonnes
         String[] columnNames = {"Identifiant", "Date (AAAA/MM/JJ)", "Heure", "Nom", "Région épicentrale", "Choc",
-                "Longitude", "Latitude", "Intensité épicentrale", "Qualité intensité épicentrale"};
+                "X RGF93/L93", "Y RGF93/L93", "Latitude en WGS 84", "Longitude en WGS 84", "Intensité épicentrale", "Qualité intensité épicentrale"};
 
         for (int i = 0; i < columnNames.length; i++) {
             final int columnIndex = i;
@@ -168,8 +181,10 @@ public class SisFranceModel {
             rowData.add(row.nom);
             rowData.add(row.region);
             rowData.add(row.choc);
-            rowData.add(row.longitude);
-            rowData.add(row.latitude);
+            rowData.add(row.xRgf93L93); // Ajout du champ X RGF93/L93
+            rowData.add(row.yRgf93L93); // Ajout du champ Y RGF93/L93
+            rowData.add(row.latitudeWGS84);
+            rowData.add(row.longitudeWGS84);
             rowData.add(row.intensite);
             rowData.add(row.qualite);
             tableView.getItems().add(rowData);
@@ -207,6 +222,7 @@ public class SisFranceModel {
         stage.show();
     }
 
+
     public static void importerDonneesCsv() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers CSV", "*.csv"));
@@ -214,23 +230,28 @@ public class SisFranceModel {
 
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(file));
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String line;
                 br.readLine(); // ignore header
+                ArrayList<SisFranceModel> nouvellesDonneesSismiques = new ArrayList<>(); // Liste temporaire pour les nouvelles données
                 while ((line = br.readLine()) != null) {
                     String[] parts = line.split(",");
-                    if (parts.length >= 10) {
+                    if (parts.length >= 12) {
                         SisFranceModel ds = new SisFranceModel(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5],
-                                parts[6], parts[7], parts[8], parts[9]);
-                        donneesSismiques.add(ds);
+                                parts[6], parts[7], parts[8], parts[9], parts[10], parts[11]);
+                        nouvellesDonneesSismiques.add(ds);
                     }
                 }
+
+                donneesSismiques.clear();
+                donneesSismiques.addAll(nouvellesDonneesSismiques);
+                mapLayer.setListSeisme();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     public static void exporterDonneesCsv() {
         FileChooser fileChooser = new FileChooser();
@@ -241,10 +262,10 @@ public class SisFranceModel {
         if (file != null) {
             try {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-                bw.write("\"Identifiant\",\"Date (AAAA/MM/JJ)\",\"Heure\",\"Nom\",\"Région épicentrale\",\"Choc\",\"Longitude\",\"Latitude\",\"Intensité épicentrale\",\"Qualité intensité épicentrale\"\n");
+                bw.write("\"Identifiant\",\"Date (AAAA/MM/JJ)\",\"Heure\",\"Nom\",\"Région épicentrale\",\"Choc\",\"X RGF93/L93\",\"Y RGF93/L93\",\"Latitude en WGS 84\",\"Longitude en WGS 84\",\"Intensité épicentrale\",\"Qualité intensité épicentrale\"\n");
                 for (SisFranceModel ds : donneesSismiques) {
                     bw.write("\"" + ds.identifiant + "\",\"" + ds.date + "\",\"" + ds.heure + "\",\"" + ds.nom + "\",\"" + ds.region +
-                            "\",\"" + ds.choc + "\",\"" + ds.longitude + "\",\"" + ds.latitude +
+                            "\",\"" + ds.choc + "\",\"" + ds.longitudeWGS84 + "\",\"" + ds.latitudeWGS84 +
                             "\",\"" + ds.intensite + "\",\"" + ds.qualite + "\"\n");
                 }
                 bw.close();

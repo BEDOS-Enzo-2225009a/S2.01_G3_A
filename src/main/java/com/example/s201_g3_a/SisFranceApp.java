@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SisFranceApp extends Application {
+
+
     @Override
     public void start(Stage stage) throws IOException {
         System.setProperty("javafx.platform", "desktop");
@@ -19,6 +21,8 @@ public class SisFranceApp extends Application {
         Parent root = fxmlLoader.load();
 
         SisFranceView view = fxmlLoader.getController();
+
+
 
 
         Scene scene = new Scene(root, 1200, 800);

@@ -30,10 +30,6 @@
             </MenuBar>
         </top>
         <center>
-
-            <Pane fx:id="paneMG">
-                <Pane id="graphPane" fx:id="graphPane" />
-            </Pane>
             <MapView fx:id="map" zoom="6"></MapView>
         </center>
         <right>
