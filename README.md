@@ -13,9 +13,10 @@ Yoni SAFRAN --> [**Yonisfrn**](https://github.com/YoniSAFRANS22002518) / YoniSAF
 
 - `.idea`
 - `.mvn/wrapper`
--  `src/main`
+-  `html` --> Documentation Javadoc
+-  `src/main` --> Projet SisFrance
 -  `.gitignore`
--  `README.md`
+-  `README.md` --> Vous etes entrain de le lire :)
 -  `mvnw`
 -  `mvnw.cmd`
 -  `pom.xm`
